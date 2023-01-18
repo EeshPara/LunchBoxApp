@@ -6,75 +6,133 @@
 //
 
 import SwiftUI
-
+import PhotosUI
+import FirebaseStorage
 struct AdminPanel1: View {
+    @ObservedObject var restaurant : Restaurant
     @State private var RestaurantName = ""
     @State private var RestaurantDisc = ""
-    @State private var MenuItemName = ""
-    @State private var MenuItemPrice = 0.0
-    @State private var MenuItemDisc = ""
-    
-    
+    @State private var RestaurantCollege = ""
+    @State private var RestaurantDailyDiscount = 0.0
+    //@State private var RestaurantHappyHourTimes = ""
+    // @State private var RestaurantHappyHourDiscount = 0.0
+    @State private var menu : Array<MenuItem> = []
+    @State private var subPacks : Array<SubPack> = []
+    @State var selectedItems : [PhotosPickerItem] = []
+    @State var data: Data?
+    @State var filePath = ""
     
     var body: some View {
-         
+        
         VStack{
-            var menu : Array<MenuItem> = []
-            var menuSize = 0
-            Text("Admin Panel")
-                .bold()
-                .font(.system(size: 35))
-                .padding(.bottom,15)
             
-            Form{
+            
+            HStack{
+                
+                Text("Restaurant Init")
+                    .bold()
+                    .font(.system(size: 35))
+                    .padding(.bottom,15)
+                Button("Save") {
+                    initilize()
+                    uploadPhoto()
+                }
+                .padding(.bottom, 20)
+                .padding(.leading, 75)
+                .buttonStyle(.borderedProminent)
+                .backgroundStyle(Color(.purple))
+            }
+            
+            Form {
+                //Restaurant Info
                 TextField("RestaurantName", text: $RestaurantName)
                     .disableAutocorrection(true)
-                    .accessibilityIdentifier("RestaurantNameField")
-                   
                 TextField("RestaurantDisc", text: $RestaurantDisc)
                     .disableAutocorrection(true)
-                
-                Button("Save") {
-                    print(RestaurantDisc)
-                }
-                .padding(.leading, 140)
-                
-                
-                //MenuItems Initialization
-                TextField("MenuItemName", text: $MenuItemName)
+                TextField("RestaurantCollege", text: $RestaurantCollege)
                     .disableAutocorrection(true)
-                    
-                TextField("MenuItemDisc", text: $MenuItemDisc)
+                TextField("DailyDiscount", value: $RestaurantDailyDiscount, format: .number)
                     .disableAutocorrection(true)
-                TextField("MenuItemPrice", value: $MenuItemPrice, format: .number)
-                    .disableAutocorrection(true)
-                
-                
-                Button("add") {
-                    menu.append(MenuItem(Itemname: MenuItemName, Itemprice: MenuItemPrice, ItemDisc: MenuItemDisc))
-                    menuSize+=1
-                }
-                .padding(.leading,140)
-                    
+                /*
+                 TextField("HappyHourTimes", text: $RestaurantHappyHourTimes)
+                 .disableAutocorrection(true)
+                 TextField("HappyHourDiscount", value: $RestaurantHappyHourDiscount, format: .number)
+                 .disableAutocorrection(true)*/
             }
             
-            List{
-                ForEach(menu){ MenuItem in
-                    Text(MenuItem.Itemname)
-                    
-                }
-                
+            //Upload Restaurant Photo
+            if let data = data, let UIImage = UIImage(data: data){
+                Image(uiImage: UIImage)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 250, height: 250)
             }
-
+            
+            PhotosPicker(selection: $selectedItems,maxSelectionCount: 1,  matching: .images) {
+                Text("Upload Restaurant Photos")
+                
+            }.onChange(of: selectedItems) { newValue in
+                Task{
+                    if let dataVar = try? await newValue.first?.loadTransferable(type: Data.self) {
+                        data = dataVar
+                    }
+                }
+            }
+            
+            
+            
+            
+            
+            
+            
+            
             
         }
-
     }
-}
-
-struct AdminPanel1_Previews: PreviewProvider {
-    static var previews: some View {
-        AdminPanel1()
+    
+    func initilize(){
+        
+        
+        restaurant.ResterauntName = RestaurantName
+        restaurant.RestaurantDisc = RestaurantDisc
+        restaurant.RestaurantCollege = RestaurantCollege
+        restaurant.dailyDiscount = RestaurantDailyDiscount
+        restaurant.ResterauntImage = filePath
+        // restaurant.DailyMenuDisc = RestaurantDailyMenuDiscount
+        // restaurant.HappyHourTimes = RestaurantHappyHourTimes
+        // restaurant.HappyHourDisc = RestaurantHappyHourDiscount
+        
+        
+        
     }
+    
+    
+     func uploadPhoto(){
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        
+        // Create a reference to 'images/mountains.jpg'
+        filePath = "RestaurantImages/\(restaurant.ResterauntName).jpg"
+         restaurant.ResterauntImage = filePath
+        let RestaurantImagesRef = storageRef.child(filePath)
+         if data != nil{
+             let uploadTask =  RestaurantImagesRef.putData(data! , metadata: nil) { (metadata, error) in
+                 guard let metadata = metadata else {
+                     // Uh-oh, an error occurred!
+                     return
+                 }
+             }
+         }
+        
+        
+    }
+    
+    
+    
+    struct AdminPanel1_Previews: PreviewProvider {
+        static var previews: some View {
+            AdminPanel1(restaurant: Restaurant())
+        }
+    }
+    
 }
-

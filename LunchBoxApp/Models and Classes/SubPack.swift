@@ -6,19 +6,33 @@
 //
 
 import Foundation
-class SubPack{
+class SubPack : Identifiable{
     var packName: String
     var packPrice: Double
     var amountSaved: Double
-    var pack: Array<MenuItem>
-    init(packName: String, packPrice: Double, amountSaved: Double, pack: Array<MenuItem>) {
+    var packTypes: Array<String>
+    init(packName: String, packPrice: Double, amountSaved: Double, packTypes: Array<String>) {
         self.packName = packName
         self.packPrice = packPrice
         self.amountSaved = amountSaved
-        self.pack = pack
+        self.packTypes = packTypes
         
-        for item in pack{
-            item.Itemprice = 0
-        }
     }
+    init(){
+        packName = ""
+        packPrice = 0.0
+        amountSaved = 0.0
+        packTypes = [""]
+    }
+    func makeDict()->[ String: Any]{
+        var SubPackDict : Dictionary<String, Any>
+        SubPackDict = [:]
+        SubPackDict["PackName"] = packName
+        SubPackDict["PackPrice"] = packPrice
+        SubPackDict["AmountSaved"] = amountSaved
+        SubPackDict["PackItems"] = packTypes
+        return SubPackDict
+    }
+    
+    
 }

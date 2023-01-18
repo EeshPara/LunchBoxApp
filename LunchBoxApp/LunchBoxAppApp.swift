@@ -6,12 +6,21 @@
 //
 
 import SwiftUI
+import Firebase
+
 
 @main
 struct LunchBoxAppApp: App {
+    init(){
+        FirebaseApp.configure()
+        
+    }
+    
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+                LogInAndSignUp()
+           
         }
     }
 }

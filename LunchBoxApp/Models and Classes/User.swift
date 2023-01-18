@@ -6,20 +6,38 @@
 //
 
 import Foundation
-class User {
-    var UserName : String
-    var Email : String
-    var CardNumber : Int
-    var CardHolderName : String
-    var ExpiryDate : String
-    var CVV : Int
-    init(UserName: String, Email: String, CardNumber: Int, CardHolderName: String, ExpiryDate: String, CVV: Int) {
+class User : ObservableObject{
+    @Published var UserName : String
+    @Published var Email : String
+    @Published var college : String
+    var UID : String
+    var coupons : Array<Coupon>
+    init(){
+        UserName = ""
+        Email = ""
+        college = ""
+        UID = ""
+        coupons = []
+    }
+    init(UserName: String, Email: String, college: String, UID: String) {
         self.UserName = UserName
         self.Email = Email
-        self.CardNumber = CardNumber
-        self.CardHolderName = CardHolderName
-        self.ExpiryDate = ExpiryDate
-        self.CVV = CVV
+        self.college = college
+        self.UID = UID
+        coupons = []
+    }
+    func makeDict()-> Dictionary<String,Any>{
+        var dict : Dictionary<String,Any> = [:]
+        dict["Username"] = UserName
+        dict["Email"] = Email
+        dict["College"] = college
+        dict["UID"] = UID
+        var coups :  Array<Dictionary<String,Any>> = []
+        for coupon in coupons {
+            coups.append(coupon.makeDict())
+        }
+        dict["Coupons"] = coups
+        return dict
     }
 }
 
