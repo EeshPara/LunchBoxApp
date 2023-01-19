@@ -106,9 +106,12 @@ struct AdminPanel3MenuInit: View {
                     
                     
                     Button("add") {
-                        itemtoAdd = MenuItem(Itemname: MenuItemName, Itemprice: MenuItemPrice, ItemDisc: MenuItemDisc, type: MenuItemType, discountofTheDay: MenuItemIsDiscountOfTheDay, itemRestaurant: restaurant.ResterauntName)
-                        addItem(ItemToAdd: itemtoAdd)
                         uploadPhoto()
+                       
+                        itemtoAdd = MenuItem(Itemname: MenuItemName, Itemprice: MenuItemPrice, ItemDisc: MenuItemDisc, type: MenuItemType, discountofTheDay: MenuItemIsDiscountOfTheDay, itemRestaurant: restaurant.ResterauntName)
+                       
+                        addItem(ItemToAdd: itemtoAdd)
+                        
                         
                     }
                     .padding(.leading,140)

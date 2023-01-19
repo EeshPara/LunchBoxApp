@@ -14,30 +14,62 @@ struct FrontEndTabView: View {
     @ObservedObject var user  : User
     //Creatig the Coupon Object with all the info of the current coupon being made (this is the coupon that needs to be generated)
     @StateObject var currCoupon = Coupon()
+    
+    
     var body: some View {
         VStack{
         
             // All Differnt tab Views and I'm passing the state objects to all of them
-            
-            TabView{
-                UserProfile(currCoupon: currCoupon, user: user)
-                    .tabItem{
-                        Label("Profile",systemImage: "person")
-                    }
-                Home(currCoupon: currCoupon)
-                    .tabItem{
-                        Label("Home",systemImage: "house")
-                    }
-                Restaurants(currCoupon: currCoupon, user: user)
-                    .tabItem{
-                        Label("Restaurants",systemImage: "list.clipboard")
-                    }
-                Coupons(currCoupon: currCoupon, user: user)
-                    .tabItem {
-                        Label("Coupons", systemImage: "list.bullet.rectangle.fill")
+                VStack{
+                    
+                    TabView{
+                        
+                        
+                        Home(currCoupon: currCoupon)
+                            .tabItem{
+                                VStack{
+                                    Image("Image")
+                                        
+                                    
+                                }
+                            }
+                        
+                        
+                        Restaurants(currCoupon: currCoupon, user: user)
+                            .tabItem{
+                                VStack{
+                                    Image("drink")
+                                        .frame(width: 10,height: 10)
+                                    
+                                }
+                            }
+                        
+                        Coupons(currCoupon: currCoupon, user: user)
+                            .tabItem {
+                                VStack{
+                                    Image("Money")
+                                        .frame(width: 10,height: 10)
+                                    
+                                }
+                                
+                            }
+                        
+                        UserProfile(currCoupon: currCoupon, user: user)
+                            .tabItem{
+                                VStack{
+                                    Image("User_alt")
+                                        .frame(width: 10,height: 10)
+                                    
+                                }
+                            }
+                        
                         
                     }
-            }
+                       
+                }
+                
+            
+           
         }
     }
   
@@ -45,6 +77,6 @@ struct FrontEndTabView: View {
 
 struct FrontEndTabView_Previews: PreviewProvider {
     static var previews: some View {
-        FrontEndTabView(user: User() )
+        FrontEndTabView(user: User())
     }
 }

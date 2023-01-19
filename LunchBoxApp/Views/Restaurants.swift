@@ -14,51 +14,78 @@ struct Restaurants: View {
     @ObservedObject var user : User
     @State var rm = reusableMethods()
     @State var restaurantImage :UIImage?
+    @State var search : String = ""
+    @State var showingPopover = false
+    @State var currRestaurant: Restaurant =  Restaurant()
   
     let db = Firestore.firestore()
     var body: some View {
         NavigationStack{
             VStack{
+                
+               
+
                 HStack{
-                    Text("Restaurants")
-                        .bold()
-                        .font(.system(size: 35))
-                        .padding(.bottom,15)
-                        .foregroundColor(.black)
-                        .padding(20)
-                    Spacer()
+                    Image("Screenshot_2023-01-12_at_2.15")
+                        .padding()
+                        Spacer()
                 }
+                HStack {
+                  
+                    
+                    TextField("Search Restaurants", text: $search)
+                    Image(systemName: "magnifyingglass")
+                }
+                .padding()
+                .overlay(RoundedRectangle(cornerRadius: 100).stroke(Color.black, lineWidth: 1))
+                .padding()
+                
                 
                
                 //List of restaurants
                 ScrollView{
                     ForEach(restaurants, id: \.self) { restaurant in
-                        ZStack{
-                           
-                            VStack{
-                                Spacer()
-                                HStack{
-                                    Text(restaurant.ResterauntName)
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 20))
-                                        .bold()
+                        VStack{
+                            ZStack{
+                                RestaurantImageView(restaurant: restaurant)
+                                VStack{
                                     Spacer()
-                                    NavigationLink("View"){
-                                        RestaurantView(currRestaurant: restaurant, currCoupon: currCoupon, user: user)
+                                    HStack{
+                                        Text(restaurant.ResterauntName)
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 20))
+                                            .bold()
+                                        Spacer()
+                                        Button("View"){
+                                            print("tapped")
+                                            currRestaurant.ResterauntName = restaurant.ResterauntName
+                                            currRestaurant.dailyDiscount = restaurant.dailyDiscount
+                                            currRestaurant.MenuItems = restaurant.MenuItems
+                                            currRestaurant.ResterauntImage = restaurant.ResterauntImage
+                                            currRestaurant.RestaurantDisc = restaurant.RestaurantDisc
+                                            showingPopover = true
+                                            
+                                            
+                                        }
+                                        .padding(15)
+                                        .background(Color.black)
+                                        .foregroundColor(.white)
+                                        .cornerRadius(8)
+                                        .frame(width: 70, height: 44)
                                     }
-                                    .padding(15)
-                                    .background(Color.black)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(8)
-                                    .frame(width: 70, height: 30)
                                 }
+                                .padding(30)
+                                .frame(width: 350, height: 200)
+                               
                             }
-                            .padding(30)
-                            .frame(width: 350, height: 200)
-                            .background(RestaurantImageView(restaurant: restaurant))
-                        }.padding(15)
+                            
+                            
+                        }.padding()
+                    } .popover(isPresented: $showingPopover) {
+                        RestaurantView(currRestaurant: currRestaurant, currCoupon: currCoupon, user: user)
+                            .presentationDetents([.large])
                         
-                        }
+                    }
                     
                 }
                

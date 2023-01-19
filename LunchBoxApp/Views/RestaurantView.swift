@@ -15,65 +15,151 @@ struct RestaurantView: View {
     @ObservedObject var currCoupon : Coupon
     @ObservedObject var user : User
     @State var showinngPopover = false
+    
     var body: some View {
-        ZStack{
-            NavigationStack{
-                VStack{
-                    Text(currRestaurant.ResterauntName)
-                        .bold()
-                        .font(.system(size: 35))
-                        .padding(.bottom,15)
-                        .frame(alignment: .leading)
-                    
-                    Text("Daily Discount: 10%")
-                        .bold()
-                        .font(.system(size: 25))
-                        .padding(.bottom,15)
-                    List(currRestaurant.MenuItems){ menuItem in
-                        HStack{
-                            VStack{
-                                Text(menuItem.Itemname)
-                                    .bold()
-                                    .font(.system(size:20))
-                                
-                                Text(menuItem.ItemDisc)
-                                    .font(.system(size:12))
-                                
-                            }
-                            VStack{
-                                let price =  String(format: "%.2f", (menuItem.Itemprice) * 0.9)
-                                Text("Price: \( price)")
-                                
-                            }
-                            Spacer()
-                            Button("add"){
-                                if(currCoupon.items.isEmpty){
-                                    currCoupon.restaurantName = menuItem.itemRestaurant
-                                }
-                                if(currCoupon.restaurantName == menuItem.itemRestaurant){
-                                    currCoupon.items.append(menuItem)
-                                    print(menuItem.itemImage)
-                                    added = menuItem.Itemname
-                                }
-                                else{
-                                    added = "You can only make coupons with items from the same stores"
-                                }
-                            }.padding(15)
-                                .background(Color(red: 230/255, green: 59/255, blue: 36/255))
-                                .foregroundColor(.white)
-                                .cornerRadius(30)
-                        }
-                    }
-                    HStack{
-                        Text("Added To Coupon:  \(added)")
+       
+                ScrollView{
+                    VStack{
                         
-                    }
-                    Button("Generate Coupan"){
-                        Task{
-                           await genCoupon()
-                            currCoupon.items = []
-                            showinngPopover = true
+                        
+                        
+                        ZStack(alignment: .top, content: {
+                            
+                            
+                            LargeRestaurantImageView(restaurant: currRestaurant)
+                                .ignoresSafeArea()
+                                .frame(alignment: .top)
+                            
+                            
+                            VStack{
+                                Spacer()
+                                    .frame(height: 30)
+                                RoundedRectangle(cornerRadius: 300)
+                                    .fill(.black)
+                                    .frame(width: 200, height: 8)
+                                    .padding()
+                                
+                                Spacer()
+                                    .frame(height: 30)
+                                Text(currRestaurant.ResterauntName)
+                                    .bold()
+                                    .font(.system(size: 35))
+                                    .padding(.bottom,15)
+                                    .frame(alignment: .leading)
+                                    .foregroundColor(.white)
+                                    .ignoresSafeArea()
+                                Spacer()
+                                    .frame(height: 120)
+                                
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(.white)
+                                    .frame(height: 60)
+                                    .shadow(radius: 3, y: -10)
+                                
+                                
+                            }
+                        })
+                        
+                        
+                        VStack{
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 8)
+                                    .frame(width: 350, height: 50)
+                                    .foregroundColor(.green)
+                                    .shadow(radius: 3, y: 3)
+                                    .padding(15)
+                                
+                                
+                                
+                                
+                                Text("Daily Discount: \(String(format: "%.1f",currRestaurant.dailyDiscount))%")
+                                    .bold()
+                                    .font(.system(size: 18))
+                                    .padding(15)
+                                    .foregroundColor(.white)
+                                
+                            }
+                            
+                            HStack{
+                                Text("Menu:")
+                                    .padding(20)
+                                    .bold()
+                                Spacer()
+                            }
+                            ScrollView{
+                                ForEach(currRestaurant.MenuItems, id: \.self) { menuItem in
+                                    VStack{
+                                        HStack{
+                                            MenuItemImageView(menuItem: menuItem)
+                                                .frame(width: 100, height: 100)
+                                                .padding(10)
+                                            VStack{
+                                                Text(menuItem.Itemname)
+                                                    .bold()
+                                                    .font(.system(size:20))
+                                                
+                                                Text(menuItem.ItemDisc)
+                                                    .font(.system(size:12))
+                                                
+                                            }
+                                            VStack{
+                                                let price =  String(format: "%.2f", (menuItem.Itemprice) * (1-(currRestaurant.dailyDiscount/100)))
+                                                Text("$ \( price)")
+                                                    .bold()
+                                                
+                                            }
+                                            Spacer().frame(width: 10)
+                                            Button("add"){
+                                                if(currCoupon.items.isEmpty){
+                                                    currCoupon.restaurantName = menuItem.itemRestaurant
+                                                }
+                                                if(currCoupon.restaurantName == menuItem.itemRestaurant){
+                                                    currCoupon.items.append(menuItem)
+                                                    print(menuItem.itemImage)
+                                                    added = menuItem.Itemname
+                                                }
+                                                else{
+                                                    added = "You can only make coupons with items from the same stores"
+                                                }
+                                            }
+                                            .padding()
+                                            .background(.black)
+                                            .foregroundColor(.white)
+                                            .cornerRadius(8)
+                                        }
+                                    }
+                                    
+                                    
+                                }
+                            }
                         }
+                    }
+                    ZStack{
+                        RoundedRectangle(cornerRadius: 8)
+                            .frame(width: 350, height: 50)
+                            .foregroundColor(.white)
+                            .shadow(radius: 5)
+                        VStack{
+                            HStack{
+                               
+                                Text("Added To Coupon:  \(added)")
+                                    .bold()
+                                    
+                                
+                            }
+                            HStack{
+                                Button("Generate Coupan"){
+                                    Task{
+                                        await genCoupon()
+                                        currCoupon.items = []
+                                        showinngPopover = true
+                                    }
+                                    
+                                }
+                                
+                            }
+                        }
+                        
                         
                     }
                     .popover(isPresented: $showinngPopover, content: {
@@ -91,8 +177,7 @@ struct RestaurantView: View {
                     
                 }
             }
-        }
-    }
+    
     
     func genCoupon() async {
         //Make code more applicable

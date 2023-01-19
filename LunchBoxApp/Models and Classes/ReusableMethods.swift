@@ -28,7 +28,7 @@ class reusableMethods{
             fin.SubscriptionPacks.append(subPackDicttTosubpackObject(dict: dictTracker))
         }
         fin.ResterauntImage = dict["RestaurantImage"] as! String
-        fin.dailyDiscount = 0 //dict["Average Savings"] as! Double
+        fin.dailyDiscount = dict["DailyDiscount"] as! Double
         return fin
         
     }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 import FirebaseStorage
-struct MenuItemImageView: View {
+struct LargeMenuItemImageView: View {
     let menuItem: MenuItem
     @State var MenuItemImage: UIImage?
 
@@ -22,13 +22,12 @@ struct MenuItemImageView: View {
             Image(uiImage: self.MenuItemImage ?? UIImage())
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 100, height: 100)
+                .frame(width: 350, height: 200)
                 .cornerRadius(10)
                 .overlay(RoundedRectangle(cornerRadius: 8)
-                    .fill(LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.5), Color.white.opacity(0.2)]), startPoint: .bottom, endPoint: .top)))
+                    .fill(LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.8), Color.white.opacity(0.2)]), startPoint: .bottom, endPoint: .top)))
             
         }.shadow(radius: 3, y: 3)
-            .padding()
         .task {
             await getMenuItemImage()
         }
@@ -56,7 +55,7 @@ struct MenuItemImageView: View {
     }
 }
 
-struct MenuItemImageView_Previews: PreviewProvider {
+struct LargeMenuItemImageView_Previews: PreviewProvider {
     static var previews: some View {
         MenuItemImageView(menuItem: MenuItem())
     }

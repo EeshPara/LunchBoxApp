@@ -34,7 +34,7 @@ struct LogInAndSignUp: View {
                         TextField("Email", text: $email)
                     }
                     .padding()
-                    .overlay(RoundedRectangle(cornerRadius: 100).stroke(Color(red: 230/255, green: 59/255, blue: 36/255), lineWidth: 3))
+                    .overlay(RoundedRectangle(cornerRadius: 100).stroke(.black, lineWidth: 2))
                     .padding()
                     HStack {
                         Image(systemName:"lock")
@@ -42,14 +42,15 @@ struct LogInAndSignUp: View {
                         TextField("Password", text: $password)
                     }
                     .padding()
-                    .overlay(RoundedRectangle(cornerRadius: 100).stroke(Color(red: 230/255, green: 59/255, blue: 36/255), lineWidth: 3))
+                    .overlay(RoundedRectangle(cornerRadius: 100).stroke(.black, lineWidth: 2))
+
                     .padding()
                     
                     NavigationLink("SignUp Instead"){
                         signup
                     }
                     .navigationBarBackButtonHidden(true)
-                    
+                    .padding(.bottom, 10)
     
                     Button("Sign In"){
                         Task{
@@ -59,11 +60,11 @@ struct LogInAndSignUp: View {
                         
                         
                     }
-                    
                     .padding(15)
-                    .background(Color(red: 230/255, green: 59/255, blue: 36/255))
+                    .background(Color.black)
                     .foregroundColor(.white)
                     .cornerRadius(50)
+                    .frame(width: 1000, height: 30)
                     
                 }
             }
@@ -140,7 +141,8 @@ struct LogInAndSignUp: View {
                         TextField("Email", text: $email)
                     }
                     .padding()
-                    .overlay(RoundedRectangle(cornerRadius: 100).stroke(Color(red: 230/255, green: 59/255, blue: 36/255), lineWidth: 3))
+                    .overlay(RoundedRectangle(cornerRadius: 100).stroke(.black, lineWidth: 2))
+
                     .padding()
                     
                     HStack {
@@ -149,7 +151,8 @@ struct LogInAndSignUp: View {
                         TextField("Password", text: $password)
                     }
                     .padding()
-                    .overlay(RoundedRectangle(cornerRadius: 100).stroke(Color(red: 230/255, green: 59/255, blue: 36/255), lineWidth: 3))
+                    .overlay(RoundedRectangle(cornerRadius: 100).stroke(.black, lineWidth: 2))
+
                     .padding()
                     
                     HStack {
@@ -157,7 +160,8 @@ struct LogInAndSignUp: View {
                         TextField("User Name", text: $userName)
                     }
                     .padding()
-                    .overlay(RoundedRectangle(cornerRadius: 100).stroke(Color(red: 230/255, green: 59/255, blue: 36/255), lineWidth: 3))
+                    .overlay(RoundedRectangle(cornerRadius: 100).stroke(.black, lineWidth: 2))
+
                     .padding()
                     
                     HStack {
@@ -166,7 +170,8 @@ struct LogInAndSignUp: View {
                         TextField("College", text: $College)
                     }
                     .padding()
-                    .overlay(RoundedRectangle(cornerRadius: 100).stroke(Color(red: 230/255, green: 59/255, blue: 36/255), lineWidth: 3))
+                    .overlay(RoundedRectangle(cornerRadius: 100).stroke(.black, lineWidth: 2))
+
                     .padding()
                     
                     Button("Sign Up"){
@@ -175,13 +180,11 @@ struct LogInAndSignUp: View {
                         
                         
                     }
-                    
-                        
-                    
                     .padding(15)
-                    .background(Color(red: 230/255, green: 59/255, blue: 36/255))
+                    .background(Color.black)
                     .foregroundColor(.white)
                     .cornerRadius(50)
+                    .frame(width: 1000, height: 30)
                 }
             }
         }

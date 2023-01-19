@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		064644192977AD5100D15776 /* LargeMenuItemImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064644182977AD5100D15776 /* LargeMenuItemImageView.swift */; };
 		0648F1862915E681004E8B02 /* LunchBoxAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0648F1852915E681004E8B02 /* LunchBoxAppApp.swift */; };
 		0648F1882915E681004E8B02 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0648F1872915E681004E8B02 /* ContentView.swift */; };
 		0648F18A2915E682004E8B02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0648F1892915E682004E8B02 /* Assets.xcassets */; };
@@ -19,6 +20,9 @@
 		0648F1B92915E741004E8B02 /* SubPack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0648F1B82915E741004E8B02 /* SubPack.swift */; };
 		0648F1BB2915E75E004E8B02 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0648F1BA2915E75E004E8B02 /* Restaurant.swift */; };
 		0648F1BD2915E77C004E8B02 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0648F1BC2915E77C004E8B02 /* MenuItem.swift */; };
+		0648FAA92978B37D00CDC3B0 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0648FAA82978B37D00CDC3B0 /* CustomTabBar.swift */; };
+		0648FAAB2978C47200CDC3B0 /* LargeRestuarantImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0648FAAA2978C47200CDC3B0 /* LargeRestuarantImageView.swift */; };
+		0648FAAD2978D4E100CDC3B0 /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0648FAAC2978D4E100CDC3B0 /* MenuItemView.swift */; };
 		064A3DD12975EF08003EB99A /* MenuItemImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064A3DD02975EF08003EB99A /* MenuItemImageView.swift */; };
 		064B317F29217A1200891D6D /* AdminPanelTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064B317E29217A1200891D6D /* AdminPanelTabView.swift */; };
 		064B318129217FC600891D6D /* AdminPanel2PackInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064B318029217FC600891D6D /* AdminPanel2PackInit.swift */; };
@@ -83,6 +87,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		064644182977AD5100D15776 /* LargeMenuItemImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeMenuItemImageView.swift; sourceTree = "<group>"; };
 		0648F1822915E681004E8B02 /* LunchBoxApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LunchBoxApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0648F1852915E681004E8B02 /* LunchBoxAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchBoxAppApp.swift; sourceTree = "<group>"; };
 		0648F1872915E681004E8B02 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -99,6 +104,9 @@
 		0648F1B82915E741004E8B02 /* SubPack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubPack.swift; sourceTree = "<group>"; };
 		0648F1BA2915E75E004E8B02 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		0648F1BC2915E77C004E8B02 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
+		0648FAA82978B37D00CDC3B0 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		0648FAAA2978C47200CDC3B0 /* LargeRestuarantImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeRestuarantImageView.swift; sourceTree = "<group>"; };
+		0648FAAC2978D4E100CDC3B0 /* MenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
 		064A3DD02975EF08003EB99A /* MenuItemImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemImageView.swift; sourceTree = "<group>"; };
 		064B317E29217A1200891D6D /* AdminPanelTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminPanelTabView.swift; sourceTree = "<group>"; };
 		064B318029217FC600891D6D /* AdminPanel2PackInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminPanel2PackInit.swift; sourceTree = "<group>"; };
@@ -257,10 +265,14 @@
 				06580538293C1E8700EB817C /* Home.swift */,
 				0658053A293C1E9F00EB817C /* Restaurants.swift */,
 				0676138C2975086900AAD746 /* RestaurantViewBuilder.swift */,
+				0648FAAA2978C47200CDC3B0 /* LargeRestuarantImageView.swift */,
 				064A3DD02975EF08003EB99A /* MenuItemImageView.swift */,
+				064644182977AD5100D15776 /* LargeMenuItemImageView.swift */,
 				065217DE29515CD2004C132A /* RestaurantView.swift */,
+				0648FAAC2978D4E100CDC3B0 /* MenuItemView.swift */,
 				064F7A442965CD0E00E04B80 /* Coupons.swift */,
 				0658053C293C1ECB00EB817C /* FrontEndTabView.swift */,
+				0648FAA82978B37D00CDC3B0 /* CustomTabBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -432,7 +444,10 @@
 				0676138D2975086900AAD746 /* RestaurantViewBuilder.swift in Sources */,
 				064F7A452965CD0E00E04B80 /* Coupons.swift in Sources */,
 				0648F1B72915E72C004E8B02 /* User.swift in Sources */,
+				064644192977AD5100D15776 /* LargeMenuItemImageView.swift in Sources */,
+				0648FAAB2978C47200CDC3B0 /* LargeRestuarantImageView.swift in Sources */,
 				0658053D293C1ECB00EB817C /* FrontEndTabView.swift in Sources */,
+				0648FAAD2978D4E100CDC3B0 /* MenuItemView.swift in Sources */,
 				06580537293C1E7900EB817C /* UserProfile.swift in Sources */,
 				064B318129217FC600891D6D /* AdminPanel2PackInit.swift in Sources */,
 				065217DF29515CD2004C132A /* RestaurantView.swift in Sources */,
@@ -448,6 +463,7 @@
 				064B31832921835600891D6D /* AdminPanel3MenuInit.swift in Sources */,
 				06CBD2BB29651E4E00CAD2EA /* Coupon.swift in Sources */,
 				069129C62932F76100254AEC /* LogInAndSignUp.swift in Sources */,
+				0648FAA92978B37D00CDC3B0 /* CustomTabBar.swift in Sources */,
 				0648F1B52915E6E0004E8B02 /* AdminPanel1.swift in Sources */,
 				066D47EA295E4E7E0081512E /* SetDiscountOfTheDay.swift in Sources */,
 				0648F1862915E681004E8B02 /* LunchBoxAppApp.swift in Sources */,

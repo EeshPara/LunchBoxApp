@@ -7,7 +7,7 @@
 
 import SwiftUI
 import FirebaseStorage
-struct RestaurantImageView: View {
+struct LargeRestaurantImageView: View {
     let restaurant: Restaurant
     @State var restaurantImage: UIImage?
 
@@ -21,14 +21,14 @@ struct RestaurantImageView: View {
             Image(uiImage: self.restaurantImage ?? UIImage())
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 350, height: 200)
+                .frame(width: 400, height: 300)
                 .cornerRadius(10)
                 .overlay(RoundedRectangle(cornerRadius: 8)
                     .fill(LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.85), Color.white.opacity(0.2)]), startPoint: .bottom, endPoint: .top)))
             
         }
         .allowsHitTesting(false)
-        .shadow(radius: 3, y: 3)
+        
         .task {
             getRestaurantImage()
         }

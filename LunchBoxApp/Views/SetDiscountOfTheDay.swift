@@ -92,7 +92,7 @@ struct SetDiscountOfTheDay: View {
       
         
         do{
-            let documents = try await db.collection("Resaurant").getDocuments()
+            let documents = try await db.collection("Restaurants").getDocuments()
             for document in documents.documents{
                 restaurants.append(rm.restDictToRestObject(dict: document.data()))
             }

@@ -17,43 +17,69 @@ struct Coupons: View {
     var body: some View {
         ZStack{
             VStack{
-                
-                Text("Coupons")
-                    .bold()
-                    .font(.system(size: 35))
-                    .padding(.bottom,15)
-                
-                Text("Keep building: ")
-                
-                List(currCoupon.items){ menuItem in
-                    HStack{
-                        VStack{
-                            Text(menuItem.Itemname)
-                                .bold()
-                                .font(.system(size:20))
-                            
-                            Text(menuItem.ItemDisc)
-                                .font(.system(size:12))
-                            
-                        }
-                        VStack{
-                            let price =  String(format: "%.2f", (menuItem.Itemprice) * 0.9)
-                            Text("Price: \( price)")
-                            
-                        }
+                HStack{
+                    Image("Screenshot_2023-01-12_at_2.15")
+                        .padding()
                         Spacer()
-                        Button("Delete"){
-                            
-                        }.padding(15)
-                            .background(Color(red: 230/255, green: 59/255, blue: 36/255))
-                            .foregroundColor(.white)
-                            .cornerRadius(30)
-                    }
                 }
-                .frame(height: 300)
-                Button("Generate Coupon"){
+                
+                HStack{
+                    Text("Current Coupon: ")
+                        .bold()
+                        .font(.system(size: 20))
+                        .padding()
+                        .lineLimit(1)
+                   
                     
+                    Button("Build"){
+                        
+                    }
+                    .font(.system(size: 15))
+                    .foregroundColor(.white)
+                    .padding(10)
+                    .background(.black)
+                    .cornerRadius(8)
+                    .frame(width: 200, height: 15)
+                   
                 }
+               
+              
+                    List(currCoupon.items){ menuItem in
+                        HStack{
+                            
+                            
+                            
+                            VStack{
+                                MenuItemImageView(menuItem: menuItem)
+                                Text(menuItem.Itemname)
+                                    .bold()
+                                    .font(.system(size:20))
+                                    
+                                let price =  String(format: "%.2f", (menuItem.Itemprice) * 0.9)
+                                Text("$\( price)")
+                                    .font(.system(size: 13))
+                                
+                            }
+                            
+                            
+                           Spacer()
+                            Button("Delete"){
+                                
+                            }
+                            .font(.system(size: 15))
+                            .foregroundColor(.white)
+                            .padding(10)
+                            .background(.black)
+                            .cornerRadius(8)
+                            .frame(width: 200, height: 15)
+                            
+                        }.padding()
+                       
+                       
+                    }
+                    .frame(width: 400, height: 300)
+                    .scrollContentBackground(.hidden)
+               
                 HStack{
                     Text("Use")
                         .bold()
@@ -61,8 +87,7 @@ struct Coupons: View {
                         .padding(.bottom,15)
                         .padding(.trailing, 300)
                 }
-                var ButtonName = "Use"
-                var ButtonColor = Color(red: 230/255, green: 59/255, blue: 36/255)
+               
                 
                 List(coupons){coupon in
                     
@@ -117,6 +142,46 @@ struct Coupons: View {
         catch{
             print(error.localizedDescription)
         }
+    }
+    
+    func genCoupon() async {
+        //Make code more applicable
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        currCoupon.date = dateFormatter.string(from: date)
+        currCoupon.name = currCoupon.items.first!.itemRestaurant
+        do{
+            let restaurantRef = try await db.collection("Restaurants").document(currCoupon.name).getDocument().data()
+            if(restaurantRef != nil){
+                let restaurant = reusableMethods().restDictToRestObject(dict: restaurantRef!)
+                for menuItem in currCoupon.items{
+                    currCoupon.price += menuItem.Itemprice * restaurant.dailyDiscount
+                    
+                    
+                }
+            }
+        }
+        catch{
+            
+        }
+       
+     
+       
+        let docRef =  db.collection("Users").document(user.UID)
+        do{
+            try await docRef.updateData([
+                "Coupons": FieldValue.arrayUnion([currCoupon.makeDict()])
+            ])
+        }
+        catch{
+            print(error.localizedDescription)
+            }
+        
+            
+        
+       
+        
     }
     
     
