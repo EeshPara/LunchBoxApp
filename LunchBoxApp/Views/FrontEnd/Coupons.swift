@@ -125,64 +125,12 @@ struct Coupons: View {
             }
         }.task {
             coupons = []
-            await getCoupons()
+            await CouponsViewModel(coupons: $coupons, user: user).getCoupons()
             
         }
     }
     
-    func getCoupons() async{
-        do{
-            if user.UID != ""{
-                let couponDicts = try await db.collection("Users").document(user.UID).getDocument().get("Coupons") as! Array<Dictionary<String,Any>>
-                for dict in couponDicts{
-                    coupons.append(reusableMethods().couponDictToObject(dict: dict))
-                }
-            }
-        }
-        catch{
-            print(error.localizedDescription)
-        }
-    }
-    
-    func genCoupon() async {
-        //Make code more applicable
-        let date = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        currCoupon.date = dateFormatter.string(from: date)
-        currCoupon.name = currCoupon.items.first!.itemRestaurant
-        do{
-            let restaurantRef = try await db.collection("Restaurants").document(currCoupon.name).getDocument().data()
-            if(restaurantRef != nil){
-                let restaurant = reusableMethods().restDictToRestObject(dict: restaurantRef!)
-                for menuItem in currCoupon.items{
-                    currCoupon.price += menuItem.Itemprice * restaurant.dailyDiscount
-                    
-                    
-                }
-            }
-        }
-        catch{
-            
-        }
-       
-     
-       
-        let docRef =  db.collection("Users").document(user.UID)
-        do{
-            try await docRef.updateData([
-                "Coupons": FieldValue.arrayUnion([currCoupon.makeDict()])
-            ])
-        }
-        catch{
-            print(error.localizedDescription)
-            }
-        
-            
-        
-       
-        
-    }
+   
     
     
 }

@@ -17,21 +17,21 @@ struct Restaurants: View {
     @State var search : String = ""
     @State var showingPopover = false
     @State var currRestaurant: Restaurant =  Restaurant()
-  
+    
     let db = Firestore.firestore()
     var body: some View {
         NavigationStack{
             VStack{
                 
-               
-
+                
+                
                 HStack{
                     Image("Screenshot_2023-01-12_at_2.15")
                         .padding()
-                        Spacer()
+                    Spacer()
                 }
                 HStack {
-                  
+                    
                     
                     TextField("Search Restaurants", text: $search)
                     Image(systemName: "magnifyingglass")
@@ -41,7 +41,7 @@ struct Restaurants: View {
                 .padding()
                 
                 
-               
+                
                 //List of restaurants
                 ScrollView{
                     ForEach(restaurants, id: \.self) { restaurant in
@@ -76,7 +76,7 @@ struct Restaurants: View {
                                 }
                                 .padding(30)
                                 .frame(width: 350, height: 200)
-                               
+                                
                             }
                             
                             
@@ -88,11 +88,11 @@ struct Restaurants: View {
                     }
                     
                 }
-               
+                
             }
             .task {
                 restaurants = []
-                await getRestaurants()
+                await RestaurantsViewModel(restaurants: $restaurants).getRestaurants()
             }
             
         }
@@ -100,31 +100,10 @@ struct Restaurants: View {
     }
     
     
-   
+}
    
   
-    @MainActor
-    func getRestaurants() async {
-        
-      //Async function that gets restaurants and makes a list of restuaraunt objects
-        
-        do{
-            let documents = try await db.collection("Restaurants").getDocuments()
-            for document in documents.documents{
-                restaurants.append(rm.restDictToRestObject(dict: document.data()))
-            }
-        }
-        catch{
-            print(error.localizedDescription)
-        }
-        
-        
-        
-    }
-       
-        
-    
-}
+ 
           
 
 

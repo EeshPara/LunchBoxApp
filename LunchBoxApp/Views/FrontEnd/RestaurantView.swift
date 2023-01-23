@@ -150,7 +150,8 @@ struct RestaurantView: View {
                             HStack{
                                 Button("Generate Coupan"){
                                     Task{
-                                        await genCoupon()
+                                        await GenerateCouponViewModel(user: user, currCoupon: currCoupon, currRestaurant: currRestaurant).genCoupon()
+
                                         currCoupon.items = []
                                         showinngPopover = true
                                     }
@@ -179,33 +180,7 @@ struct RestaurantView: View {
             }
     
     
-    func genCoupon() async {
-        //Make code more applicable
-        let date = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        currCoupon.date = dateFormatter.string(from: date)
-        currCoupon.name = currCoupon.items.first!.itemRestaurant
-        for menuItem in currCoupon.items{
-            currCoupon.price += menuItem.Itemprice * (currRestaurant.dailyDiscount/100)
-            
-        }
-       
-        let docRef =  db.collection("Users").document(user.UID)
-        do{
-            try await docRef.updateData([
-                "Coupons": FieldValue.arrayUnion([currCoupon.makeDict()])
-            ])
-        }
-        catch{
-            print(error.localizedDescription)
-            }
-        
-            
-        
-       
-        
-    }
+  
     
 }
 
