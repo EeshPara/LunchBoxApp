@@ -8,7 +8,9 @@
 import SwiftUI
 import PhotosUI
 import FirebaseStorage
+import FirebaseFirestore
 struct AdminPanel1: View {
+    let db = Firestore.firestore()
     @ObservedObject var restaurant : Restaurant
     @State private var RestaurantName = ""
     @State private var RestaurantDisc = ""
@@ -21,7 +23,9 @@ struct AdminPanel1: View {
     @State var selectedItems : [PhotosPickerItem] = []
     @State var data: Data?
     @State var filePath = ""
-    
+    @State var colleges: Array<String> = []
+    @State var selected = ""
+    @State var college = ""
     var body: some View {
         
         VStack{
@@ -29,7 +33,7 @@ struct AdminPanel1: View {
             
             HStack{
                 
-                Text("Restaurant Init")
+                Text("Store Init")
                     .bold()
                     .font(.system(size: 35))
                     .padding(.bottom,15)
@@ -49,61 +53,81 @@ struct AdminPanel1: View {
                     .disableAutocorrection(true)
                 TextField("RestaurantDisc", text: $RestaurantDisc)
                     .disableAutocorrection(true)
-                TextField("RestaurantCollege", text: $RestaurantCollege)
-                    .disableAutocorrection(true)
                 TextField("DailyDiscount", value: $RestaurantDailyDiscount, format: .number)
                     .disableAutocorrection(true)
-                /*
-                 TextField("HappyHourTimes", text: $RestaurantHappyHourTimes)
-                 .disableAutocorrection(true)
-                 TextField("HappyHourDiscount", value: $RestaurantHappyHourDiscount, format: .number)
-                 .disableAutocorrection(true)*/
-            }
-            
-            //Upload Restaurant Photo
-            if let data = data, let UIImage = UIImage(data: data){
-                Image(uiImage: UIImage)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 250, height: 250)
-            }
-            
-            PhotosPicker(selection: $selectedItems,maxSelectionCount: 1,  matching: .images) {
-                Text("Upload Restaurant Photos")
+                HStack{
+                    
+                    Menu("College"){
+                        ForEach(colleges, id: \.self){ college in
+                            Button(college){
+                                selected = college
+                                setCollege(college:college)
+                               
+                            }
+                            
+                        }
+                        
+                    }
+                    Text(":  \(selected)")
+                }
+                //Upload Restaurant Photo
+                if let data = data, let UIImage = UIImage(data: data){
+                    Image(uiImage: UIImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 250, height: 250)
+                }
                 
-            }.onChange(of: selectedItems) { newValue in
-                Task{
-                    if let dataVar = try? await newValue.first?.loadTransferable(type: Data.self) {
-                        data = dataVar
+                PhotosPicker(selection: $selectedItems,maxSelectionCount: 1,  matching: .images) {
+                    Text("Upload Restaurant Photos")
+                    
+                }.onChange(of: selectedItems) { newValue in
+                    Task{
+                        if let dataVar = try? await newValue.first?.loadTransferable(type: Data.self) {
+                            data = dataVar
+                        }
                     }
                 }
+                
             }
-            
-            
-            
-            
-            
-            
-            
-            
-            
+           
+        }
+        .task {
+            await getColleges()
         }
     }
+    
+    @MainActor
+    func getColleges() async{
+        do{
+            let documents = try await db.collection("Colleges").getDocuments()
+            for document in documents.documents{
+                colleges.append(document.data()["CollegeName"] as! String)
+            }
+           
+        }
+        catch{
+            print(error.localizedDescription)
+        }
+    }
+    
     
     func initilize(){
         
         
         restaurant.ResterauntName = RestaurantName
         restaurant.RestaurantDisc = RestaurantDisc
-        restaurant.RestaurantCollege = RestaurantCollege
         restaurant.dailyDiscount = RestaurantDailyDiscount
         restaurant.ResterauntImage = filePath
-        // restaurant.DailyMenuDisc = RestaurantDailyMenuDiscount
-        // restaurant.HappyHourTimes = RestaurantHappyHourTimes
-        // restaurant.HappyHourDisc = RestaurantHappyHourDiscount
+        restaurant.RestaurantCollege = selected
         
         
         
+        
+    }
+    
+    func setCollege(college : String){
+        restaurant.RestaurantCollege = college
     }
     
     

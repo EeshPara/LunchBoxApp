@@ -21,11 +21,19 @@ struct AdminPanelTabView: View {
                 }
             AdminPanel2PackInit(restaurant: restaurant)
                 .tabItem{
-                    Label("SubscriptionInit",systemImage: "")
+                    Label("CouponsInit",systemImage: "")
                 }
             SetDiscountOfTheDay()
                 .tabItem {
-                    Label("SetDiscountsofTheDay", image: "")
+                    Label("Daily Lunchbox", image: "")
+                }
+            EditRestaurants()
+                .tabItem{
+                    Label("Edit Restaurants", image: "")
+                }
+            AddColleges()
+                .tabItem{
+                    Label("AddColleges", image: "")
                 }
                 
             

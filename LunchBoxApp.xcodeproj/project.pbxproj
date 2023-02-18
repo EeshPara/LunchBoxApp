@@ -7,27 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		064644192977AD5100D15776 /* LargeMenuItemImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064644182977AD5100D15776 /* LargeMenuItemImageView.swift */; };
-		0648F1862915E681004E8B02 /* LunchBoxAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0648F1852915E681004E8B02 /* LunchBoxAppApp.swift */; };
-		0648F18A2915E682004E8B02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0648F1892915E682004E8B02 /* Assets.xcassets */; };
-		0648F18E2915E682004E8B02 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0648F18D2915E682004E8B02 /* Preview Assets.xcassets */; };
 		0648F1982915E682004E8B02 /* LunchBoxAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0648F1972915E682004E8B02 /* LunchBoxAppTests.swift */; };
 		0648F1A22915E682004E8B02 /* LunchBoxAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0648F1A12915E682004E8B02 /* LunchBoxAppUITests.swift */; };
 		0648F1A42915E682004E8B02 /* LunchBoxAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0648F1A32915E682004E8B02 /* LunchBoxAppUITestsLaunchTests.swift */; };
-		0648F1B52915E6E0004E8B02 /* AdminPanel1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0648F1B42915E6E0004E8B02 /* AdminPanel1.swift */; };
-		0648F1B72915E72C004E8B02 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0648F1B62915E72C004E8B02 /* User.swift */; };
-		0648F1B92915E741004E8B02 /* SubPack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0648F1B82915E741004E8B02 /* SubPack.swift */; };
-		0648F1BB2915E75E004E8B02 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0648F1BA2915E75E004E8B02 /* Restaurant.swift */; };
-		0648F1BD2915E77C004E8B02 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0648F1BC2915E77C004E8B02 /* MenuItem.swift */; };
-		0648FAAB2978C47200CDC3B0 /* LargeRestuarantImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0648FAAA2978C47200CDC3B0 /* LargeRestuarantImageView.swift */; };
-		0648FAAD2978D4E100CDC3B0 /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0648FAAC2978D4E100CDC3B0 /* MenuItemView.swift */; };
-		064A3DD12975EF08003EB99A /* MenuItemImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064A3DD02975EF08003EB99A /* MenuItemImageView.swift */; };
-		064B317F29217A1200891D6D /* AdminPanelTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064B317E29217A1200891D6D /* AdminPanelTabView.swift */; };
-		064B318129217FC600891D6D /* AdminPanel2PackInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064B318029217FC600891D6D /* AdminPanel2PackInit.swift */; };
-		064B31832921835600891D6D /* AdminPanel3MenuInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064B31822921835600891D6D /* AdminPanel3MenuInit.swift */; };
-		064F7A452965CD0E00E04B80 /* Coupons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F7A442965CD0E00E04B80 /* Coupons.swift */; };
-		065217DF29515CD2004C132A /* RestaurantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065217DE29515CD2004C132A /* RestaurantView.swift */; };
-		06572F9B292D338F001C5E95 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 06572F9A292D338F001C5E95 /* GoogleService-Info.plist */; };
 		06572F9E292D351B001C5E95 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 06572F9D292D351B001C5E95 /* FirebaseAnalytics */; };
 		06572FA0292D351B001C5E95 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 06572F9F292D351B001C5E95 /* FirebaseAnalyticsOnDeviceConversion */; };
 		06572FA2292D351B001C5E95 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 06572FA1292D351B001C5E95 /* FirebaseAnalyticsSwift */; };
@@ -55,19 +37,7 @@
 		06572FCE292D351C001C5E95 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 06572FCD292D351C001C5E95 /* FirebaseRemoteConfigSwift */; };
 		06572FD0292D351C001C5E95 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 06572FCF292D351C001C5E95 /* FirebaseStorage */; };
 		06572FD2292D351C001C5E95 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 06572FD1292D351C001C5E95 /* FirebaseStorageCombine-Community */; };
-		06580537293C1E7900EB817C /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06580536293C1E7900EB817C /* UserProfile.swift */; };
-		06580539293C1E8700EB817C /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06580538293C1E8700EB817C /* Home.swift */; };
-		0658053B293C1E9F00EB817C /* Restaurants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658053A293C1E9F00EB817C /* Restaurants.swift */; };
-		0658053D293C1ECB00EB817C /* FrontEndTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658053C293C1ECB00EB817C /* FrontEndTabView.swift */; };
-		0664E566297E1171003CB541 /* RestaurantsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664E565297E1171003CB541 /* RestaurantsViewModel.swift */; };
-		0664E568297E119F003CB541 /* CouponsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664E567297E119F003CB541 /* CouponsViewModel.swift */; };
-		0664E56A297E11C9003CB541 /* GenerateCouponViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664E569297E11C9003CB541 /* GenerateCouponViewModel.swift */; };
-		066D47EA295E4E7E0081512E /* SetDiscountOfTheDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066D47E9295E4E7E0081512E /* SetDiscountOfTheDay.swift */; };
-		0672C98E29457013004FE0F3 /* LogInAndSignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0672C98D29457013004FE0F3 /* LogInAndSignUpModel.swift */; };
-		0676138D2975086900AAD746 /* RestaurantViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0676138C2975086900AAD746 /* RestaurantViewBuilder.swift */; };
-		069129C42932EE3100254AEC /* ReusableMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069129C32932EE3100254AEC /* ReusableMethods.swift */; };
-		069129C62932F76100254AEC /* LogInAndSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069129C52932F76100254AEC /* LogInAndSignUp.swift */; };
-		06CBD2BB29651E4E00CAD2EA /* Coupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CBD2BA29651E4E00CAD2EA /* Coupon.swift */; };
+		06588F5329A19A0E004C20D0 /* LunchBoxApp in Resources */ = {isa = PBXBuildFile; fileRef = 06588F5229A19A0E004C20D0 /* LunchBoxApp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,44 +58,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		064644182977AD5100D15776 /* LargeMenuItemImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeMenuItemImageView.swift; sourceTree = "<group>"; };
 		0648F1822915E681004E8B02 /* LunchBoxApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LunchBoxApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0648F1852915E681004E8B02 /* LunchBoxAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchBoxAppApp.swift; sourceTree = "<group>"; };
-		0648F1892915E682004E8B02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0648F18B2915E682004E8B02 /* LunchBoxApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LunchBoxApp.entitlements; sourceTree = "<group>"; };
-		0648F18D2915E682004E8B02 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0648F1932915E682004E8B02 /* LunchBoxAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LunchBoxAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0648F1972915E682004E8B02 /* LunchBoxAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchBoxAppTests.swift; sourceTree = "<group>"; };
 		0648F19D2915E682004E8B02 /* LunchBoxAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LunchBoxAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0648F1A12915E682004E8B02 /* LunchBoxAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchBoxAppUITests.swift; sourceTree = "<group>"; };
 		0648F1A32915E682004E8B02 /* LunchBoxAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchBoxAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		0648F1B42915E6E0004E8B02 /* AdminPanel1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminPanel1.swift; sourceTree = "<group>"; };
-		0648F1B62915E72C004E8B02 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		0648F1B82915E741004E8B02 /* SubPack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubPack.swift; sourceTree = "<group>"; };
-		0648F1BA2915E75E004E8B02 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
-		0648F1BC2915E77C004E8B02 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
-		0648FAAA2978C47200CDC3B0 /* LargeRestuarantImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeRestuarantImageView.swift; sourceTree = "<group>"; };
-		0648FAAC2978D4E100CDC3B0 /* MenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
-		064A3DD02975EF08003EB99A /* MenuItemImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemImageView.swift; sourceTree = "<group>"; };
-		064B317E29217A1200891D6D /* AdminPanelTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminPanelTabView.swift; sourceTree = "<group>"; };
-		064B318029217FC600891D6D /* AdminPanel2PackInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminPanel2PackInit.swift; sourceTree = "<group>"; };
-		064B31822921835600891D6D /* AdminPanel3MenuInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminPanel3MenuInit.swift; sourceTree = "<group>"; };
-		064F7A442965CD0E00E04B80 /* Coupons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coupons.swift; sourceTree = "<group>"; };
-		065217DE29515CD2004C132A /* RestaurantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantView.swift; sourceTree = "<group>"; };
-		06572F9A292D338F001C5E95 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		06580536293C1E7900EB817C /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
-		06580538293C1E8700EB817C /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
-		0658053A293C1E9F00EB817C /* Restaurants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurants.swift; sourceTree = "<group>"; };
-		0658053C293C1ECB00EB817C /* FrontEndTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontEndTabView.swift; sourceTree = "<group>"; };
-		0664E565297E1171003CB541 /* RestaurantsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsViewModel.swift; sourceTree = "<group>"; };
-		0664E567297E119F003CB541 /* CouponsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponsViewModel.swift; sourceTree = "<group>"; };
-		0664E569297E11C9003CB541 /* GenerateCouponViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateCouponViewModel.swift; sourceTree = "<group>"; };
-		066D47E9295E4E7E0081512E /* SetDiscountOfTheDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDiscountOfTheDay.swift; sourceTree = "<group>"; };
-		0672C98D29457013004FE0F3 /* LogInAndSignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInAndSignUpModel.swift; sourceTree = "<group>"; };
-		0676138C2975086900AAD746 /* RestaurantViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewBuilder.swift; sourceTree = "<group>"; };
-		069129C32932EE3100254AEC /* ReusableMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableMethods.swift; sourceTree = "<group>"; };
-		069129C52932F76100254AEC /* LogInAndSignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInAndSignUp.swift; sourceTree = "<group>"; };
-		06CBD2BA29651E4E00CAD2EA /* Coupon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coupon.swift; sourceTree = "<group>"; };
+		06588F5229A19A0E004C20D0 /* LunchBoxApp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = LunchBoxApp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,7 +122,7 @@
 		0648F1792915E681004E8B02 = {
 			isa = PBXGroup;
 			children = (
-				0648F1842915E681004E8B02 /* LunchBoxApp */,
+				06588F5229A19A0E004C20D0 /* LunchBoxApp */,
 				0648F1962915E682004E8B02 /* LunchBoxAppTests */,
 				0648F1A02915E682004E8B02 /* LunchBoxAppUITests */,
 				0648F1832915E681004E8B02 /* Products */,
@@ -198,29 +137,6 @@
 				0648F19D2915E682004E8B02 /* LunchBoxAppUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		0648F1842915E681004E8B02 /* LunchBoxApp */ = {
-			isa = PBXGroup;
-			children = (
-				0664E55E297E107E003CB541 /* ViewModels */,
-				0648F1B12915E6AD004E8B02 /* Views */,
-				0648F1B02915E69E004E8B02 /* Models and Classes */,
-				0648F1852915E681004E8B02 /* LunchBoxAppApp.swift */,
-				06572F9A292D338F001C5E95 /* GoogleService-Info.plist */,
-				0648F1892915E682004E8B02 /* Assets.xcassets */,
-				0648F18B2915E682004E8B02 /* LunchBoxApp.entitlements */,
-				0648F18C2915E682004E8B02 /* Preview Content */,
-			);
-			path = LunchBoxApp;
-			sourceTree = "<group>";
-		};
-		0648F18C2915E682004E8B02 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				0648F18D2915E682004E8B02 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		0648F1962915E682004E8B02 /* LunchBoxAppTests */ = {
@@ -238,78 +154,6 @@
 				0648F1A32915E682004E8B02 /* LunchBoxAppUITestsLaunchTests.swift */,
 			);
 			path = LunchBoxAppUITests;
-			sourceTree = "<group>";
-		};
-		0648F1B02915E69E004E8B02 /* Models and Classes */ = {
-			isa = PBXGroup;
-			children = (
-				0648F1B62915E72C004E8B02 /* User.swift */,
-				0648F1B82915E741004E8B02 /* SubPack.swift */,
-				0648F1BA2915E75E004E8B02 /* Restaurant.swift */,
-				0648F1BC2915E77C004E8B02 /* MenuItem.swift */,
-				06CBD2BA29651E4E00CAD2EA /* Coupon.swift */,
-				069129C32932EE3100254AEC /* ReusableMethods.swift */,
-				0672C98D29457013004FE0F3 /* LogInAndSignUpModel.swift */,
-			);
-			path = "Models and Classes";
-			sourceTree = "<group>";
-		};
-		0648F1B12915E6AD004E8B02 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				0664E563297E10F9003CB541 /* FrontEnd */,
-				0664E55F297E1095003CB541 /* AdminPanels */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		0664E55E297E107E003CB541 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				0664E565297E1171003CB541 /* RestaurantsViewModel.swift */,
-				0664E567297E119F003CB541 /* CouponsViewModel.swift */,
-				0664E569297E11C9003CB541 /* GenerateCouponViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		0664E55F297E1095003CB541 /* AdminPanels */ = {
-			isa = PBXGroup;
-			children = (
-				0648F1B42915E6E0004E8B02 /* AdminPanel1.swift */,
-				064B318029217FC600891D6D /* AdminPanel2PackInit.swift */,
-				064B31822921835600891D6D /* AdminPanel3MenuInit.swift */,
-				066D47E9295E4E7E0081512E /* SetDiscountOfTheDay.swift */,
-				064B317E29217A1200891D6D /* AdminPanelTabView.swift */,
-			);
-			path = AdminPanels;
-			sourceTree = "<group>";
-		};
-		0664E563297E10F9003CB541 /* FrontEnd */ = {
-			isa = PBXGroup;
-			children = (
-				0664E564297E1115003CB541 /* Components */,
-				06580538293C1E8700EB817C /* Home.swift */,
-				0658053A293C1E9F00EB817C /* Restaurants.swift */,
-				06580536293C1E7900EB817C /* UserProfile.swift */,
-				069129C52932F76100254AEC /* LogInAndSignUp.swift */,
-				065217DE29515CD2004C132A /* RestaurantView.swift */,
-				0648FAAC2978D4E100CDC3B0 /* MenuItemView.swift */,
-				064F7A442965CD0E00E04B80 /* Coupons.swift */,
-				0658053C293C1ECB00EB817C /* FrontEndTabView.swift */,
-			);
-			path = FrontEnd;
-			sourceTree = "<group>";
-		};
-		0664E564297E1115003CB541 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				064644182977AD5100D15776 /* LargeMenuItemImageView.swift */,
-				064A3DD02975EF08003EB99A /* MenuItemImageView.swift */,
-				0648FAAA2978C47200CDC3B0 /* LargeRestuarantImageView.swift */,
-				0676138C2975086900AAD746 /* RestaurantViewBuilder.swift */,
-			);
-			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -448,9 +292,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0648F18E2915E682004E8B02 /* Preview Assets.xcassets in Resources */,
-				0648F18A2915E682004E8B02 /* Assets.xcassets in Resources */,
-				06572F9B292D338F001C5E95 /* GoogleService-Info.plist in Resources */,
+				06588F5329A19A0E004C20D0 /* LunchBoxApp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,34 +317,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0648F1BD2915E77C004E8B02 /* MenuItem.swift in Sources */,
-				0676138D2975086900AAD746 /* RestaurantViewBuilder.swift in Sources */,
-				0664E568297E119F003CB541 /* CouponsViewModel.swift in Sources */,
-				064F7A452965CD0E00E04B80 /* Coupons.swift in Sources */,
-				0648F1B72915E72C004E8B02 /* User.swift in Sources */,
-				064644192977AD5100D15776 /* LargeMenuItemImageView.swift in Sources */,
-				0664E566297E1171003CB541 /* RestaurantsViewModel.swift in Sources */,
-				0648FAAB2978C47200CDC3B0 /* LargeRestuarantImageView.swift in Sources */,
-				0658053D293C1ECB00EB817C /* FrontEndTabView.swift in Sources */,
-				0648FAAD2978D4E100CDC3B0 /* MenuItemView.swift in Sources */,
-				06580537293C1E7900EB817C /* UserProfile.swift in Sources */,
-				064B318129217FC600891D6D /* AdminPanel2PackInit.swift in Sources */,
-				065217DF29515CD2004C132A /* RestaurantView.swift in Sources */,
-				069129C42932EE3100254AEC /* ReusableMethods.swift in Sources */,
-				0648F1BB2915E75E004E8B02 /* Restaurant.swift in Sources */,
-				06580539293C1E8700EB817C /* Home.swift in Sources */,
-				0658053B293C1E9F00EB817C /* Restaurants.swift in Sources */,
-				0672C98E29457013004FE0F3 /* LogInAndSignUpModel.swift in Sources */,
-				0648F1B92915E741004E8B02 /* SubPack.swift in Sources */,
-				0664E56A297E11C9003CB541 /* GenerateCouponViewModel.swift in Sources */,
-				064B317F29217A1200891D6D /* AdminPanelTabView.swift in Sources */,
-				064A3DD12975EF08003EB99A /* MenuItemImageView.swift in Sources */,
-				064B31832921835600891D6D /* AdminPanel3MenuInit.swift in Sources */,
-				06CBD2BB29651E4E00CAD2EA /* Coupon.swift in Sources */,
-				069129C62932F76100254AEC /* LogInAndSignUp.swift in Sources */,
-				0648F1B52915E6E0004E8B02 /* AdminPanel1.swift in Sources */,
-				066D47EA295E4E7E0081512E /* SetDiscountOfTheDay.swift in Sources */,
-				0648F1862915E681004E8B02 /* LunchBoxAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -723,7 +537,6 @@
 		0648F1AB2915E682004E8B02 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -745,7 +558,6 @@
 		0648F1AC2915E682004E8B02 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -767,7 +579,6 @@
 		0648F1AE2915E682004E8B02 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -788,7 +599,6 @@
 		0648F1AF2915E682004E8B02 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;

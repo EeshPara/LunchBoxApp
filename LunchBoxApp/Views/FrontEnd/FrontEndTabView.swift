@@ -25,7 +25,7 @@ struct FrontEndTabView: View {
                     TabView{
                         
                         
-                        Home(currCoupon: currCoupon)
+                        Home(currCoupon: currCoupon, user: user)
                             .tabItem{
                                 VStack{
                                     Image("Image")

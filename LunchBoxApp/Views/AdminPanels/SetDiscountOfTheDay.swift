@@ -7,71 +7,95 @@
 
 import SwiftUI
 import FirebaseFirestore
-
+ 
 struct SetDiscountOfTheDay: View {
     @State var restaurants : Array<Restaurant> = []
-    @StateObject var dailyDiscounts = MenuItemContainer()
-   
+    @State var dailyDiscounts : Array<MenuItem> = []
+    @State var colleges: Array<String> = []
+    @State var selected = ""
     let db = Firestore.firestore()
     @State var rm = reusableMethods()
     var body: some View {
         NavigationStack{
             VStack{
-                Text("SetDiscountOfTheDay")
+                Text("SetDealsOfTheDay")
                     .bold()
                     .font(.system(size: 35))
                     .padding(.bottom,15)
+                
+                HStack{
+                    
+                    Menu("College"){
+                        ForEach(colleges, id: \.self){ college in
+                            Button(college){
+                                selected = college
+                                Task{
+                                    await getRestaurants()
+                                }
+                            }
+                            
+                        }
+                        
+                    }
+                    Text(":  \(selected)")
+                }
+
+                
+                
                 List(restaurants) { restaurant in
                     
                     HStack{
                         Text(restaurant.ResterauntName)
-                        NavigationLink(""){
-                            
-                            AdminRestaurantView(currRestaurant: restaurant, dailyDiscountArray: dailyDiscounts)
-                            
+                        Button("Add"){
+                            Task{
+                                await clearDailyDiscounts()
+                                db.collection("Colleges").document("Harvard").collection("DealsOfTheDay").addDocument(data: ["RestaurantUID": restaurant.RestaurantUID])
+                            }
                         }
                     }
                 }
                 
-                Text("DailyDiscounts")
-                    .bold()
-                    .font(.system(size: 20))
-                    .padding(.bottom,15)
-                
-                List(dailyDiscounts.MenuItems){MenuItem in
-                    HStack{
-                        Text("\(MenuItem.Itemname)")
-                    }
-                }
-                Button("Save"){
-                   
-                    for MenuItem in dailyDiscounts.MenuItems{
-                        var dailydiscDict:  Dictionary<String, Any>  = MenuItem.makeDict()
-                        dailydiscDict["RestaurantName"] = 
-                        db.collection("DailyDiscounts").addDocument(data: MenuItem.makeDict())
-                    }
-                    
-                    dailyDiscounts.MenuItems = []
-                   
-                }.task{
-                    await setDailyDiscounts()
-                    
-                     
-                 }
+//                Text("DailyDiscounts")
+//                    .bold()
+//                    .font(.system(size: 20))
+//                    .padding(.bottom,15)
+//
+//                List(dailyDiscounts){MenuItem in
+//                    HStack{
+//                        Text("\(MenuItem.Itemname)")
+//                    }
+//                }
+//                Button("Save"){
+//                    Task{
+//                        await clearDailyDiscounts()
+//                        for MenuItem in dailyDiscounts{
+//
+//                            db.collection("Colleges").document("Harvard").collection("DealsOfTheDay").addDocument(data: MenuItem.makeDict())
+//                        }
+//
+//                        dailyDiscounts = []
+//                    }
+//
+//
+//
+//
+//                }
             }
             
         }.task {
-            await getRestaurants()
+            await getColleges()
+            
+           
         }
     }
     
     @MainActor
-    func setDailyDiscounts() async{
+    func clearDailyDiscounts() async{
         do{
-            let documents = try await db.collection("DailyDiscounts").getDocuments()
+            let documents = try await db.collection("Colleges").document(selected).collection("DealsOfTheDay").getDocuments()
             for doc in documents.documents{
                 do{
-                    let _: Void =  try await db.collection("DailyDiscounts").document(doc.documentID).delete()
+                    let _: Void =  try await db.collection("Colleges").document(selected).collection("DealsOfTheDay").document(doc.documentID).delete()
                 }
                 catch{
                     print(error.localizedDescription)
@@ -92,7 +116,7 @@ struct SetDiscountOfTheDay: View {
       
         
         do{
-            let documents = try await db.collection("Restaurants").getDocuments()
+            let documents = try await db.collection("Colleges").document(selected).collection("Restaurants").getDocuments()
             for document in documents.documents{
                 restaurants.append(rm.restDictToRestObject(dict: document.data()))
             }
@@ -104,15 +128,31 @@ struct SetDiscountOfTheDay: View {
         
         
     }
+    
+    func getColleges() async{
+        do{
+            let documents = try await db.collection("Colleges").getDocuments()
+            for document in documents.documents{
+                colleges.append(document.data()["CollegeName"] as! String)
+            }
+           
+        }
+        catch{
+            print(error.localizedDescription)
+        }
+    }
 }
 
 
 //Struct to acces specific restaurant
 struct AdminRestaurantView: View {
     @State var currRestaurant : Restaurant
-    @ObservedObject var dailyDiscountArray : MenuItemContainer
+    @Binding var dailyDiscountArray : Array<MenuItem>
     @State var color = Color(red: 230/255, green: 59/255, blue: 36/255)
     @State var added = ""
+    @State var showPopover = false
+    @State var currentItemDiscount = 0.0
+    @State var currMenuItem = MenuItem()
     var body: some View {
         NavigationStack{
             VStack{
@@ -138,21 +178,47 @@ struct AdminRestaurantView: View {
                             
                         }
                         Spacer()
-                        var buttonState = "Set"
-                        Button(buttonState){
-                            dailyDiscountArray.MenuItems.append(menuItem)
-                            added = menuItem.Itemname
+                       
+                        Button("set"){
+                            currMenuItem.Itemname = menuItem.Itemname
+                            currMenuItem.Itemprice = menuItem.Itemprice
+                            currMenuItem.ItemDisc = menuItem.ItemDisc
+                            currMenuItem.itemImage = menuItem.itemImage
+                            currMenuItem.itemRestaurant = menuItem.itemRestaurant
+                            
+                            showPopover = true
                             
                         }
                         .padding(15)
                         .background(color)
-                            .foregroundColor(.white)
-                            .cornerRadius(30)
+                        .foregroundColor(.white)
+                        .cornerRadius(30)
+                       
+                        
                         
                         
                     }
                    
                     
+                    
+                    
+                } .popover(isPresented: $showPopover){
+                    Text("Set Discount for: \(currMenuItem.Itemname)")
+                        .padding()
+                        .bold()
+                    Form{
+                        TextField("SetDiscount", value: $currentItemDiscount, format: .number)
+                            .disableAutocorrection(true)
+                        Button("set"){
+                            currMenuItem.percentOff = currentItemDiscount
+                            added = currMenuItem.Itemname
+                            currMenuItem.percentOff = currentItemDiscount
+                            dailyDiscountArray.append(currMenuItem)
+                            currMenuItem = MenuItem()
+                            showPopover = false
+                        }
+                    }
+                        
                     
                     
                 }

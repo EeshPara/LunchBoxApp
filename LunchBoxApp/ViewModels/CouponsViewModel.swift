@@ -16,9 +16,12 @@ struct CouponsViewModel {
     func getCoupons() async{
         do{
             if user.UID != ""{
-                let couponDicts = try await db.collection("Users").document(user.UID).getDocument().get("Coupons") as! Array<Dictionary<String,Any>>
-                for dict in couponDicts{
-                    coupons.append(reusableMethods().couponDictToObject(dict: dict))
+                if coupons != nil{
+                    let couponDicts = try await db.collection("Users").document(user.UID).collection("Coupons").order(by: "Date").getDocuments().documents
+                    for dict in couponDicts{
+                        coupons.append(reusableMethods().couponDictToObject(dict: dict.data()))
+                        
+                    }
                 }
             }
         }
@@ -26,6 +29,7 @@ struct CouponsViewModel {
             print(error.localizedDescription)
         }
     }
+    
 }
 
 

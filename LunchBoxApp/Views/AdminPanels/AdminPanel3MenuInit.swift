@@ -26,13 +26,14 @@ struct AdminPanel3MenuInit: View {
     var body: some View {
         
         VStack{
-            Text("MenuInit")
+            Text("Food Init")
                 .bold()
                 .font(.system(size: 35))
                 .padding(.bottom,15)
             
             
-            
+            /*
+             Not even needed
             Form{
                 TextField("Types", text: $typesString)
                     .disableAutocorrection(true)
@@ -46,16 +47,13 @@ struct AdminPanel3MenuInit: View {
                 .padding(.leading,110)
             }
             .frame(height: 150)
-            
+            */
             Form{
                 
-                //MenuItems Initialization
-                TextField("MenuItemName", text: $MenuItemName)
-                    .disableAutocorrection(true)
-                TextField("MenuItemDisc", text: $MenuItemDisc)
-                    .disableAutocorrection(true)
-                TextField("MenuItemPrice", value: $MenuItemPrice, format: .number)
-                    .disableAutocorrection(true)
+                MakeMenuItem(MenuItemName: $MenuItemName, MenuItemPrice: $MenuItemPrice, MenuItemDisc: $MenuItemDisc,data: $data, selectedItems: $selectedItems)
+                
+                /*
+                 Not even needed rn with current version
                 HStack{
                     Menu("IsMenuOfTheDay"){
                         Button("True"){
@@ -83,27 +81,10 @@ struct AdminPanel3MenuInit: View {
                         
                     }
                     Text("  :\(MenuItemType)")
-                }
+                }*/
                 
                 //Upload MenuItem Photo
-                if let data = data, let UIImage = UIImage(data: data){
-                    Image(uiImage: UIImage)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 100, height: 100)
-                }
-                
-                PhotosPicker(selection: $selectedItems,maxSelectionCount: 1,  matching: .images) {
-                    Text("Upload Photo")
-                    
-                }.onChange(of: selectedItems) { newValue in
-                    Task{
-                        if let dataVar = try? await newValue.first?.loadTransferable(type: Data.self) {
-                            data = dataVar
-                        }
-                    }
-                }
-                    
+             
                     
                     Button("add") {
                         uploadPhoto()

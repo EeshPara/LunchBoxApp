@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseFirestore
+import AlertToast
 struct RestaurantView: View {
     let db = Firestore.firestore()
     @State var currRestaurant : Restaurant
@@ -15,13 +16,12 @@ struct RestaurantView: View {
     @ObservedObject var currCoupon : Coupon
     @ObservedObject var user : User
     @State var showinngPopover = false
+    @State var showToast = false
     
     var body: some View {
        
                 ScrollView{
                     VStack{
-                        
-                        
                         
                         ZStack(alignment: .top, content: {
                             
@@ -31,6 +31,7 @@ struct RestaurantView: View {
                                 .frame(alignment: .top)
                             
                             
+                        
                             VStack{
                                 Spacer()
                                     .frame(height: 30)
@@ -88,6 +89,7 @@ struct RestaurantView: View {
                             }
                             ScrollView{
                                 ForEach(currRestaurant.MenuItems, id: \.self) { menuItem in
+                                    
                                     VStack{
                                         HStack{
                                             MenuItemImageView(menuItem: menuItem)
@@ -103,24 +105,28 @@ struct RestaurantView: View {
                                                 
                                             }
                                             VStack{
-                                                let price =  String(format: "%.2f", (menuItem.Itemprice) * (1-(currRestaurant.dailyDiscount/100)))
-                                                Text("$ \( price)")
+                                                
+                                                Text("$ \( String(format: "%.2f", (menuItem.Itemprice) * (1-(currRestaurant.dailyDiscount/100))))")
                                                     .bold()
                                                 
                                             }
                                             Spacer().frame(width: 10)
                                             Button("add"){
+                                                var copy = menuItem.copy() as! MenuItem
+                                                copy.Itemprice = (menuItem.Itemprice) * (1-(currRestaurant.dailyDiscount/100))
                                                 if(currCoupon.items.isEmpty){
                                                     currCoupon.restaurantName = menuItem.itemRestaurant
                                                 }
                                                 if(currCoupon.restaurantName == menuItem.itemRestaurant){
-                                                    currCoupon.items.append(menuItem)
+                                                    currCoupon.items.append(copy)
                                                     print(menuItem.itemImage)
                                                     added = menuItem.Itemname
+                                                    showToast.toggle()
                                                 }
                                                 else{
                                                     added = "You can only make coupons with items from the same stores"
                                                 }
+                                                
                                             }
                                             .padding()
                                             .background(.black)
@@ -130,6 +136,10 @@ struct RestaurantView: View {
                                     }
                                     
                                     
+                                }
+                                .toast(isPresenting: $showToast, duration: 1.2, tapToDismiss: true){
+                                    AlertToast(type: .complete(Color.green), title: "Added to Coupon")
+                                        
                                 }
                             }
                         }
@@ -150,7 +160,7 @@ struct RestaurantView: View {
                             HStack{
                                 Button("Generate Coupan"){
                                     Task{
-                                        await GenerateCouponViewModel(user: user, currCoupon: currCoupon, currRestaurant: currRestaurant).genCoupon()
+                                        await GenerateCouponViewModel(user: user, currCoupon: currCoupon).genCoupon()
 
                                         currCoupon.items = []
                                         showinngPopover = true
@@ -163,6 +173,7 @@ struct RestaurantView: View {
                         
                         
                     }
+                    
                     .popover(isPresented: $showinngPopover, content: {
                         VStack{
                             Text("Your coupon was generated!")
@@ -177,7 +188,8 @@ struct RestaurantView: View {
                     
                     
                 }
-            }
+        
+    }
     
     
   

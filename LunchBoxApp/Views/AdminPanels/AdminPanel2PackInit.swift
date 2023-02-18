@@ -3,21 +3,24 @@
 //  LunchBoxApp
 //
 //  Created by Rama Parasuramuni on 11/13/22.
-//
+// 
 
 import SwiftUI
-import Firebase
-
+import FirebaseFirestore
+import AlertToast
 struct AdminPanel2PackInit: View {
     @ObservedObject var restaurant : Restaurant
-    @State private var packs: Array<SubPack> = []
-    @State private var types = [""]
-    @State private var typesofCurrPack = [""]
-    @State private var price = 0.0
-    @State private var packName = ""
-    @State private var amtSaved = 0.0
-    @State private var currType = ""
+    @State private var coupons: Array<Coupon> = []
+
+    @State private var couponDescription = ""
+    @State private var couponName = ""
+    @State private var percentOff = 0.0
     @State private var MenuInit = AdminPanel3MenuInit(restaurant: Restaurant())
+    @State  var savedRestaurantToDatabase = false
+    @State var itemsInCOupon : Array<MenuItem> = []
+    @State var showtoast = false
+    @State var currCoupon : Coupon = Coupon()
+    @State var percentChance = 0.0
     let db = Firestore.firestore()
     
     
@@ -25,102 +28,118 @@ struct AdminPanel2PackInit: View {
     var body: some View {
         VStack{
             
-            Text("Sub Init")
+            Text("Coupon Init")
                 .bold()
                 .font(.system(size: 35))
                 .padding(.bottom,15)
             
-            Button("SetTypes") {
-                print(restaurant.ItemTypes)
-                types = restaurant.ItemTypes
-                print(types)
-                
-            }
-            .padding(.top, 20)
-            .padding(.leading,5)
-            .buttonStyle(.borderedProminent)
+           
             
             Form{
-                TextField("PackName", text: $packName)
+                TextField("CouponName", text: $couponName)
                     .disableAutocorrection(true)
-                TextField("PackPrice", value: $price, format: .number)
+                TextField("Description", text: $couponDescription)
                     .disableAutocorrection(true)
-                TextField("AmountSaved", value: $amtSaved, format: .number)
+                TextField("PercentOf", value: $percentOff, format: .number)
                     .disableAutocorrection(true)
-                
-                    HStack{
-                        Menu("Type"){
-                            
-                            ForEach(types, id: \.self){type in
-                                
-                                Button(type){
-                                    setType(type:type)
-                                    typesofCurrPack.append(type)
-                                
-                                }
+                TextField("PercentChance", value: $percentChance, format: .number)
+                    .disableAutocorrection(true)
+                 
+                HStack{
+                    Menu("Menu Items:"){
+                        
+                        ForEach(restaurant.MenuItems, id: \.self){ menuItem in
+                            Button(menuItem.Itemname){
+                                addMenuItem(menuItem: menuItem)
+                                showtoast.toggle()
                             }
-                            
                         }
-                        Text("  :\(currType)")
-                            .padding(.trailing, 50)
-                        Button("add"){
-                            add(subpack: SubPack(packName: packName, packPrice: price, amountSaved: amtSaved, packTypes: typesofCurrPack))
-                            typesofCurrPack = []
-                        }
-                        .padding(.leading, 50)
+                        
+                        
+                        
                     }
-                
-                
-                ForEach(typesofCurrPack, id:\.self){type in
-                    Text(type)
                     
                 }
                 
+                
+                Button("add"){
+                    currCoupon.name = couponName
+                    currCoupon.desc = couponDescription
+                    currCoupon.percentOff = percentOff
+                    currCoupon.percentChance = percentChance
+                    currCoupon.items = itemsInCOupon
+                    add(coupon: currCoupon)
+                }
+                .buttonStyle(.borderedProminent)
+                .padding(.leading, 130)
+              
             }
+         
+            
             .padding(.bottom,10)
             HStack{
                 Text("Current Packs")
                     .bold()
                     .font(.system(size: 25))
-                Button("Save"){
-                    restaurant.SubscriptionPacks = packs
-                    db.collection("Restaurants").addDocument(data: restaurant.makeDict())
+                Button("Save coupons"){
+                   
+
+                    for coupon in coupons {
+                        db.collection("Colleges").document(restaurant.RestaurantCollege).collection("Restaurants").document(restaurant.RestaurantUID).collection("RestaurantCoupons").addDocument(data: coupon.makeDict())
+                    }
+                    
+                    
                    
                 }
+                .padding(.leading, 50)
+                .disabled(!savedRestaurantToDatabase)
                 .buttonStyle(.borderedProminent)
-                    .padding(.leading,80)
+                
+              
             }
                 
             List{
-                ForEach(packs){ pack in
+                ForEach(coupons){ coupon in
                     HStack{
-                        
-                        Text(pack.packName)
-                            .padding(.trailing, 50)
-                        let priceRounded = String(format: "%g", pack.packPrice)
-                        Text("Price: \(priceRounded)")
-                            .padding(.leading,50)
+                        VStack{
+                            Text(coupon.name)
+                                .padding(.trailing, 50)
+                            Text("Number of MenuItems: \(coupon.items.count)")
+                        }
+                        Text("\(coupon.percentOff)%")
+                      
                         
                     }
                     
                 }
             }
+            Button("Save Restaurant to Database"){
+               
+
+                db.collection("Colleges").document(restaurant.RestaurantCollege).collection("Restaurants").document(restaurant.RestaurantUID).setData(restaurant.makeDict())
+                savedRestaurantToDatabase = true
+                
+               
+            }
+            .buttonStyle(.borderedProminent)
+              
          
+            
+        } .toast(isPresenting: $showtoast, duration: 1) {
+            AlertToast(displayMode: .hud, type: .regular, title: "Added")
+               
             
         }
         
     }
     
-    
-    func getPacks() -> Array<SubPack>{
-        return packs
+    func add(coupon: Coupon){
+        coupons.append(coupon)
+        currCoupon = Coupon()
+        itemsInCOupon = []
     }
-       
-    func setType(type: String){
-            currType = type
-    }
-    func add(subpack: SubPack){
-        packs.append(subpack)
+    func addMenuItem(menuItem: MenuItem){
+        itemsInCOupon.append(menuItem)
     }
     
 }

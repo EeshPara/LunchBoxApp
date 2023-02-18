@@ -8,6 +8,7 @@
 import SwiftUI
 import FirebaseFirestore
 struct Coupons: View {
+    
     let db = Firestore.firestore()
     @ObservedObject var currCoupon : Coupon
     @ObservedObject var user : User
@@ -29,54 +30,52 @@ struct Coupons: View {
                         .font(.system(size: 20))
                         .padding()
                         .lineLimit(1)
+                        .padding(.trailing,100)
                    
-                    
+                   
                     Button("Build"){
-                        
+                        Task{
+                            await GenerateCouponViewModel(user: user, currCoupon: currCoupon).genCoupon()
+                            currCoupon.items = []
+                            coupons = []
+                            await CouponsViewModel(coupons: $coupons, user: user).getCoupons()
+                        }
                     }
                     .font(.system(size: 15))
                     .foregroundColor(.white)
                     .padding(10)
                     .background(.black)
                     .cornerRadius(8)
-                    .frame(width: 200, height: 15)
+                    
                    
                 }
                
               
-                    List(currCoupon.items){ menuItem in
+                List{
+                    ForEach(currCoupon.items){ menuItem in
                         HStack{
-                            
-                            
-                            
                             VStack{
                                 MenuItemImageView(menuItem: menuItem)
                                 Text(menuItem.Itemname)
                                     .bold()
                                     .font(.system(size:20))
-                                    
-                                let price =  String(format: "%.2f", (menuItem.Itemprice) * 0.9)
+                                let price =  String(format: "%.2f", menuItem.Itemprice)
                                 Text("$\( price)")
                                     .font(.system(size: 13))
                                 
                             }
                             
                             
-                           Spacer()
-                            Button("Delete"){
-                                
-                            }
-                            .font(.system(size: 15))
-                            .foregroundColor(.white)
-                            .padding(10)
-                            .background(.black)
-                            .cornerRadius(8)
-                            .frame(width: 200, height: 15)
+                            Spacer()
+                            
                             
                         }.padding()
-                       
-                       
+                        
                     }
+                    .onDelete { indexSet in
+                        delete(index: indexSet)
+                    }
+                }
                     .frame(width: 400, height: 300)
                     .scrollContentBackground(.hidden)
                
@@ -102,10 +101,10 @@ struct Coupons: View {
                             couponDisplayed.name = coupon.name
                             couponDisplayed.date = coupon.date
                             couponDisplayed.items = coupon.items
+                            couponDisplayed.price = coupon.price
                             showingPopover = true
                             
                         }
-                      
                         .padding(15)
                         .cornerRadius(30)
                         .scaleEffect(x: 1, y: -1, anchor: .center)
@@ -114,9 +113,10 @@ struct Coupons: View {
                         
                     }
                 }
+                .scrollContentBackground(.hidden)
                 .popover(isPresented: $showingPopover) {
-                    CouponPopover(Coupon: couponDisplayed)
-                        .presentationDetents([.medium])
+                    CouponPopover(coupon: couponDisplayed, user: user)
+                        .presentationDetents([.height(700)])
                     
                 }
                 .frame(height: 200)
@@ -130,52 +130,16 @@ struct Coupons: View {
         }
     }
     
-   
+    func delete(index: IndexSet){
+        currCoupon.items.remove(atOffsets: index)
+
+    }
+
     
     
 }
 
-struct CouponPopover: View{
-    @State var coupon : Coupon
-    init(Coupon: Coupon) {
-        self.coupon = Coupon
-    }
-    var body: some View{
-        VStack{
-            Text(coupon.name)
-                .bold()
-                .font(.system(size: 35))
-                .padding(.bottom,10)
-            Text(coupon.date)
-                .padding()
-            ScrollView(.horizontal){
-                HStack(spacing: 20){
-                    ForEach(coupon.items, id: \.self) { item in
-                        
-                        VStack{
-                            if(item.itemImage != ""){
-                                MenuItemImageView(menuItem: item)
-                            }
-                            Text(item.Itemname)
-                                .bold()
-                        }
-                        .padding(30)
-                    }
-                    
-                }
-            }
-            
-            Button("Confirm"){
-                
-            }
-            .padding(15)
-            .background(Color.black)
-            .foregroundColor(.white)
-            .cornerRadius(20)
-        }
-        .frame(width: 350, height: 200)
-    }
-}
+
 
 struct Coupons_Previews: PreviewProvider {
     static var previews: some View {

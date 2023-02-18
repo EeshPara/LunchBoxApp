@@ -29,20 +29,23 @@ class reusableMethods{
         }
         fin.ResterauntImage = dict["RestaurantImage"] as! String
         fin.dailyDiscount = dict["DailyDiscount"] as! Double
+        fin.RestaurantUID =  dict["RestaurantUID"] as! String
         return fin
         
     }
     
     func menuDictToMenuItemObject(dict: Dictionary<String,Any>)-> MenuItem{
+   
         var fin = MenuItem()
         fin.Itemname = dict["Itemname"] as! String
         fin.Itemprice =  dict["ItemPrice"] as! Double
         fin.ItemDisc = dict["ItemDisc"] as! String
         fin.type = dict["ItemType"] as! String
         fin.itemRestaurant = dict["ItemRestaurant"] as! String
+        fin.percentOff = dict["PercentOff"] as! Double
         fin.discountOfTheDay = false//dict["savings"] as! Double
         if(dict["ItemImage"] != nil){
-            fin.itemImage = dict["ItemImage"] as! String
+           fin.itemImage = dict["ItemImage"] as! String
         }
         
         return fin
@@ -67,7 +70,7 @@ class reusableMethods{
         fin.UID = dict["UID"] as! String
         return fin
     }
-    
+     
     func couponDictToObject (dict: Dictionary<String,Any>) -> Coupon{
         var fin = Coupon()
         fin.name = dict["Name"] as! String
@@ -75,7 +78,8 @@ class reusableMethods{
         fin.desc = dict["Desc"] as! String
         fin.usedAndConfirmed = dict["UsedAndConfirmed"] as! Bool
         fin.price = dict["price"] as! Double
-        fin.amtSaved = dict["amtSaved"] as! Double
+        fin.percentOff = dict["PercentOff"] as! Double
+        fin.percentChance = dict["PercentChance"] as! Double
         var menuDict : Array <Dictionary<String,Any>> = dict["items"] as! Array<Dictionary<String, Any>>
         for dictTracker in menuDict{
             fin.items.append(menuDictToMenuItemObject(dict: dictTracker))

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MenuItem : Identifiable, ObservableObject, Hashable{
+class MenuItem : Identifiable, ObservableObject, Hashable, NSCopying{
     static func == (lhs: MenuItem, rhs: MenuItem) -> Bool {
         return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
     }
@@ -22,6 +22,7 @@ class MenuItem : Identifiable, ObservableObject, Hashable{
     var discountOfTheDay : Bool
     var itemRestaurant : String
     var itemImage : String
+    var percentOff : Double
     init(Itemname: String, Itemprice: Double, ItemDisc: String, type:String, discountofTheDay: Bool, itemRestaurant: String) {
         self.Itemname = Itemname
         self.Itemprice = Itemprice
@@ -30,6 +31,7 @@ class MenuItem : Identifiable, ObservableObject, Hashable{
         self.discountOfTheDay = discountofTheDay
         self.itemRestaurant = itemRestaurant
         itemImage = ""
+        percentOff = 0
     }
     init(){
         Itemname = ""
@@ -39,6 +41,7 @@ class MenuItem : Identifiable, ObservableObject, Hashable{
         discountOfTheDay = false
         itemRestaurant = ""
         itemImage = ""
+        percentOff = 0
     }
     
     func makeDict()->[ String: Any]{
@@ -50,9 +53,17 @@ class MenuItem : Identifiable, ObservableObject, Hashable{
         menuItemDict["DiscountOfTheDay"] = discountOfTheDay
         menuItemDict["ItemType"] = type
         menuItemDict["ItemRestaurant"] = itemRestaurant
+        menuItemDict["PercentOff"] = percentOff
         print(itemImage)
         menuItemDict["ItemImage"] = itemImage
         return menuItemDict
+    }
+    
+    func copy(with zone: NSZone? = nil) -> Any {
+        var copy = MenuItem(Itemname: Itemname, Itemprice: Itemprice, ItemDisc: ItemDisc, type: type, discountofTheDay: discountOfTheDay, itemRestaurant: itemRestaurant)
+        copy.itemImage = itemImage
+        copy.percentOff = percentOff
+        return copy
     }
 }
 

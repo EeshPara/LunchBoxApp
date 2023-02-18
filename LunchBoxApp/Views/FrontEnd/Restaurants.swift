@@ -32,8 +32,8 @@ struct Restaurants: View {
                 }
                 HStack {
                     
-                    
-                    TextField("Search Restaurants", text: $search)
+                    // make search functionality and change to restuarants later
+                    TextField("Search Stores", text: $search)
                     Image(systemName: "magnifyingglass")
                 }
                 .padding()
@@ -46,6 +46,7 @@ struct Restaurants: View {
                 ScrollView{
                     ForEach(restaurants, id: \.self) { restaurant in
                         VStack{
+                          
                             ZStack{
                                 RestaurantImageView(restaurant: restaurant)
                                 VStack{
@@ -82,6 +83,7 @@ struct Restaurants: View {
                             
                         }.padding()
                     } .popover(isPresented: $showingPopover) {
+                        //shows the restaurant popup
                         RestaurantView(currRestaurant: currRestaurant, currCoupon: currCoupon, user: user)
                             .presentationDetents([.large])
                         
@@ -91,8 +93,12 @@ struct Restaurants: View {
                 
             }
             .task {
-                restaurants = []
-                await RestaurantsViewModel(restaurants: $restaurants).getRestaurants()
+                if( restaurants == []){
+                    //gets restaurants
+                    
+                    await RestaurantsViewModel(restaurants: $restaurants, user: user).getRestaurants()
+                }
+                
             }
             
         }

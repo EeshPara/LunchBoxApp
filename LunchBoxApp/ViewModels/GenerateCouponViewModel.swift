@@ -11,7 +11,8 @@ struct GenerateCouponViewModel{
     let db = Firestore.firestore()
     @ObservedObject var user : User
     @ObservedObject var currCoupon: Coupon
-    @ObservedObject var currRestaurant: Restaurant
+    @State var couponToDelete : Coupon?
+ 
     //generates and adds coupon to user's coupon array field
     func genCoupon() async {
         //Make code more applicable
@@ -19,23 +20,35 @@ struct GenerateCouponViewModel{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
         currCoupon.date = dateFormatter.string(from: date)
-        currCoupon.name = currCoupon.items.first!.itemRestaurant
+        currCoupon.name = UUID().uuidString
+        currCoupon.restaurantName = currCoupon.items.first?.itemRestaurant ?? ""
+        currCoupon.price = 0
         for menuItem in currCoupon.items{
-            currCoupon.price += menuItem.Itemprice * (currRestaurant.dailyDiscount/100)
+            currCoupon.price += menuItem.Itemprice
             
         }
        
-        let docRef =  db.collection("Users").document(user.UID)
+      
         do{
-            try await docRef.updateData([
-                "Coupons": FieldValue.arrayUnion([currCoupon.makeDict()])
-            ])
+            
+            try await db.collection("Users").document(user.UID).collection("Coupons").document("CurrentCoupon").setData(currCoupon.makeDict())
         }
         catch{
             print(error.localizedDescription)
             }
         
     }
+    func deleteCoupon() async {
+       
+        do{
+            try await db.collection("Users").document(user.UID).collection("Coupons").document("CurrentCoupon").delete()
+        }
+        catch{
+            print(error.localizedDescription)
+            }
+        
+    }
+
 }
 
 

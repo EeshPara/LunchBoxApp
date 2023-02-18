@@ -18,40 +18,12 @@ struct UserProfile: View {
         NavigationStack{
             VStack{
                
-                Text("Welcome:  \(user.UID)")
+                Text("Welcome:  \(user.UserName)")
             }
             
         }
     }
-   /* @MainActor
-    Code to get a user from a certain email(Plan on deleting)
-    func getUser(email: String) async{
-        do{
-            print("got to await user")
-            print(email)
-            //Finds all the users with the Email field that matches up with the supplied email(there should only be one)
-            let curr = try await db.collection("Users").whereField("Email", isEqualTo: email).getDocuments()
-            
-            print(curr.count)
-            print("got documents")
-            //Loops through the one doc
-            for doc in curr.documents{
-                //passes
-                let currUser = reusableMethods().userDictToObject(dict: doc.data())
-                user.UserName = currUser.UserName
-                user.Email = currUser.Email
-                user.college = currUser.college
-                user.UID = currUser.UID
-               
-            }
-        }
-        
-        catch{
-            print(error.localizedDescription)
-            
-        }
-        
-    }*/
+
     
     struct UserProfile_Previews: PreviewProvider {
         static var previews: some View {
